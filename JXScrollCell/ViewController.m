@@ -15,6 +15,7 @@
 
 @interface ViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, weak) UITableView *tableView;
+@property (nonatomic, strong) NSMutableArray *imageNameArray;
 @end
 
 @implementation ViewController
@@ -25,15 +26,21 @@
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     tableView.dataSource = self;
     tableView.delegate = self;
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:tableView];
     self.tableView = tableView;
     [tableView registerClass:[CustomScrollCell class] forCellReuseIdentifier:@"CustomScrollCell"];
     [tableView reloadData];
+    
+    self.imageNameArray = [NSMutableArray array];
+    for (NSInteger index = 0; index < 14; index ++) {
+        [self.imageNameArray addObject:[NSString stringWithFormat:@"image%03ld.jpg",index]];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 50;
+    return 14;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -45,8 +52,9 @@
 {
     CustomScrollCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CustomScrollCell" forIndexPath:indexPath];
     [cell resetParallaxState];
-    [cell parallaxWithView:cell.headerImageView offsetUp:70 offsetDown:50];
-    [cell parallaxWithView:cell.nameLabel offsetUp:20 offsetDown:30];
+    cell.headerImageView.image = [UIImage imageNamed:[self.imageNameArray objectAtIndex:indexPath.row]];
+    [cell parallaxWithView:cell.headerImageView offsetUp:50 offsetDown:50];
+    [cell parallaxWithView:cell.nameLabel offsetUp:10 offsetDown:10];
     [cell updateViewFrameWithScrollView:tableView];
     return cell;
 }
