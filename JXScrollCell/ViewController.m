@@ -53,8 +53,9 @@
     CustomScrollCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CustomScrollCell" forIndexPath:indexPath];
     [cell resetParallaxState];
     cell.headerImageView.image = [UIImage imageNamed:[self.imageNameArray objectAtIndex:indexPath.row]];
-    [cell parallaxWithView:cell.headerImageView offsetUp:50 offsetDown:50];
-    [cell parallaxWithView:cell.nameLabel offsetUp:10 offsetDown:10];
+    [cell parallaxWithView:cell.headerImageView offsetUp:60 offsetDown:50];
+    //可以添加多个子视图进行视差化滚动，当就这个demo只让图片视差化滚动效果更佳
+//    [cell parallaxWithView:cell.nameLabel offsetUp:10 offsetDown:10];
     [cell updateViewFrameWithScrollView:tableView];
     return cell;
 }

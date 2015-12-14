@@ -15,9 +15,9 @@ static NSString *const kParallaxOffsetDown = @"kParallaxOffsetDown";
 
 @interface ParallaxCell ()
 
-@property (nonatomic, strong) NSMutableArray *originalCenterYArray;
-@property (nonatomic, strong) NSMutableArray *parallaxViewArray;
-@property (nonatomic, assign) BOOL hasInited;
+@property (nonatomic, strong) NSMutableArray *originalCenterYArray;//用于记录视差化视图的原始中心Y值
+@property (nonatomic, strong) NSMutableArray *parallaxViewArray;//记录视差化的视图
+@property (nonatomic, assign) BOOL hasInited;//为了应付重用，用于只记录alloc出来的，重用出来的需要重置状态
 
 @end
 
